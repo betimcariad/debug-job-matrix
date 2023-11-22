@@ -1,0 +1,40 @@
+name: Direct Root Matrix Caller
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  use-root-matrix-ok:
+    name: Use root matrix OK.${{ matrix.build-group-id }}
+    strategy:
+      matrix:
+        include:
+          - build-group: ----_----1----_----2----_----3----_----4----_----5----_----6----_----7----_----8----_
+            build-group-id: 1
+      max-parallel: 1
+    uses: ./.github/workflows/reusable-nested-matrix.yml
+    with:
+      group: ${{ matrix.build-group }}
+      group-id: ${{ matrix.build-group-id }}
+
+  use-root-matrix-not-ok:
+    name: Use root matrix !OK.${{ matrix.build-group-id }}
+    needs:
+      - use-root-matrix-ok
+    if: always()
+    strategy:
+      matrix:
+        include:
+          - build-group: ----_----1----_----2----_----3----_----4----_----5----_----6----_----7----_----8----_-
+            build-group-id: 1
+          - build-group: "#####################################################################################"
+            build-group-id: 2_
+          - build-group: ----_----1----_----2----_----3----_----4----_----5----_----6----_----7----_----8----_-
+            build-group-id: 3
+            foo: "1"
+      max-parallel: 1
+    uses: ./.github/workflows/reusable-nested-matrix.yml
+    with:
+      group: ${{ matrix.build-group }}
+      group-id: ${{ matrix.build-group-id }}

@@ -1,0 +1,41 @@
+on:
+  workflow_call:
+    inputs:
+      group:
+        description: Group of build jobs
+        type: string
+      group-id:
+        description: Group of build jobs ID
+        type: string
+
+jobs:
+#   a:
+# #     name: Nested matrix ${{ inputs.group-id }}.A.${{ matrix.project }}
+#     runs-on: ubuntu-latest
+#     if: ${{ always() }}
+#     strategy:
+#       matrix:
+#         include:
+#           - project: foo1
+#             config: ----_----1----_----2----_----3----_----4----_----5----_----6----_----7----_----8----_--
+#           - project: bar1
+#             config: ----_----1----_----2----_----3----_----4----_----5----_----6----_----7----_----8----_---
+#     steps:
+#       - name: Debug
+#         run: |
+#           echo "matrix\n: ${{ toJSON(matrix) }}"
+
+  b:
+#     name: Nested matrix ${{ inputs.group-id }}.B.${{ matrix.project }}
+    runs-on: ubuntu-latest
+#     needs: a
+    if: ${{ always() }}
+    strategy:
+      matrix:
+        include:
+          - project: foo2
+            config: ----_----1----_----2----_----3----_----4----_----5----_----6----_----7----_----8----_----9----
+    steps:
+      - name: Debug
+        run: |
+          echo "matrix\n: ${{ toJSON(matrix) }}"
