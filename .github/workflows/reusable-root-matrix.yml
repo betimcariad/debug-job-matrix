@@ -1,0 +1,18 @@
+on:
+  workflow_call:
+
+jobs:
+  x:
+#     name: Root matrix X.${{ matrix.build-group-id }}
+    strategy:
+      matrix:
+        include:
+          - build-group: ----_----1----_----2----_----3----_----4----_----5----_---
+            build-group-id: X1
+          - build-group: ----_----1----_----2----_----3----_----4----_----5----_---X
+            build-group-id: X2
+      max-parallel: 1
+    uses: ./.github/workflows/reusable-nested-matrix.yml
+    with:
+      group: ${{ matrix.build-group }}
+      group-id: ${{ matrix.build-group-id }}
