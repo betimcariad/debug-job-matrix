@@ -9,7 +9,7 @@ jobs:
         include:
           - build-group: ----_----1----_----2----_----3----_----4----_----5----_---
             build-group-id: X1
-          - build-group: ----_----1----_----2----_----3----_----4----_----5----_---X
+          - build-group: ----_----1----_----2----_----3----_----4----_----5----_---X----_----1----_----2----_----3----_----4----_----5----_---X
             build-group-id: X2
       max-parallel: 1
     uses: ./.github/workflows/reusable-nested-matrix.yml
