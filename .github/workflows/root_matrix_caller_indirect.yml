@@ -1,0 +1,13 @@
+name: Indirect Root Matrix Caller
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  a---_----1----_----2----_----3----_----4----_----5----_:
+    #     name: Use root matrix via reusable - OK
+    uses: ./.github/workflows/reusable-root-matrix.yml
+  b---_----1----_----2----_----3----_----4----_----5----_-:
+    #     name: Use root matrix via reusable - !OK
+    uses: ./.github/workflows/reusable-root-matrix.yml
